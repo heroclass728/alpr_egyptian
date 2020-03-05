@@ -9,7 +9,7 @@ from utils.folder_file_manager import get_index_from_file_path, load_text, save_
 
 def split_dataset_darknet():
 
-    img_dir = os.path.join(CUR_DIR, 'custom_data', 'images')
+    img_dir = os.path.join(CUR_DIR, 'darknet', 'custom_data', 'images')
     image_paths = glob.glob(os.path.join(img_dir, "*.jpg"))
     xml_paths = glob.glob(os.path.join(CUR_DIR, 'training_dataset', 'xml', '*.txt'))
     image_indices = []
@@ -27,7 +27,7 @@ def split_dataset_darknet():
 
             xml_content = load_text(filename=xml_path)
             xml_content = xml_content.replace("15", "0")
-            new_file_path = os.path.join(CUR_DIR, 'custom_data', 'images', xml_name)
+            new_file_path = os.path.join(CUR_DIR, 'darknet', 'custom_data', 'images', xml_name)
             save_file(content=xml_content, filename=new_file_path, method='w')
 
     shuffle(image_indices)
@@ -37,12 +37,12 @@ def split_dataset_darknet():
     for idx in training_indices:
 
         path = "custom_data/images/image_{}.jpg".format(idx) + "\n"
-        save_file(content=path, filename=os.path.join(CUR_DIR, 'custom_data', 'train.txt'), method='a')
+        save_file(content=path, filename=os.path.join(CUR_DIR, 'darknet', 'custom_data', 'train.txt'), method='a')
 
     for idx in test_indices:
 
         path = "custom_data/images/image_{}.jpg".format(idx) + "\n"
-        save_file(content=path, filename=os.path.join(CUR_DIR, 'custom_data', 'test.txt'), method='a')
+        save_file(content=path, filename=os.path.join(CUR_DIR, 'darknet', 'custom_data', 'test.txt'), method='a')
 
 
 if __name__ == '__main__':
